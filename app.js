@@ -107,6 +107,26 @@ app.get("/posts/:postName", async function(req, res){
  
 });
 
+app.post("/register", function(req, res){
+  const username = req.body.username;
+  const password = req.body.password;
+  //Passport method for user to register
+  User.register({username: username}, password, function(err, user){
+      if(err){
+          console.log(err);
+          res.redirect("/register");
+
+      }else{
+          //authenticate user with cookies in local browser
+          passport.authenticate("local")(req, res, function(){
+              res.redirect("/");
+          });
+      }
+  });
+  
+
+});
+
 app.post("/login", function(req, res){
   const username = req.body.username;
   const password = req.body.password;
