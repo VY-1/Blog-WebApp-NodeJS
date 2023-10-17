@@ -1,4 +1,5 @@
-<%- include("partials/header"); -%>
+<%- include("partials/header", {isLoggedIn: isLoggedIn}); -%>
+
 <h1><%= post.title %></h1>
 <p><%= post.content %></p>
 
