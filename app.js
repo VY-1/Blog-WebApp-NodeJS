@@ -15,8 +15,8 @@ require("./auth");
 
 
 //establish connection to mongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {useNewUrlParser: true});
-//mongoose.connect(process.env.MONGODB_BLOG);
+//mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_BLOG);
 
 
 const homeStartingContent = "All blogs will be posted here at the home main screen. Enjoy posting your blogs!";
