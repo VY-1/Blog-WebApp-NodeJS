@@ -1,5 +1,5 @@
 //jshint esversion:6
-
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -15,8 +15,8 @@ require("./auth");
 
 
 //establish connection to mongoDB
-//mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {useNewUrlParser: true});
-mongoose.connect(process.env.MONGODB_BLOG);
+mongoose.connect("mongodb://127.0.0.1:27017/blogDB", {useNewUrlParser: true});
+//mongoose.connect(process.env.MONGODB_BLOG);
 
 
 const homeStartingContent = "All blogs will be posted here at the home main screen. Enjoy posting your blogs!";
@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.use(session({
-  secret: "Our little secret",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -99,7 +99,7 @@ app.get("/posts/:postName", async function(req, res){
   postItems.forEach(function(post){
     const storedTitle = _.lowerCase(post.title);
     if (storedTitle === requestedTitle){
-      res.render("post", {post:post});
+      res.render("post", {post:post, isLoggedIn: req.isAuthenticated()});
     }else{
       console.log("Not a match");
     }
