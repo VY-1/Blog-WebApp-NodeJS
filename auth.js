@@ -12,7 +12,8 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
     clientID:     GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/blog",
+    callbackURL: "https://blog-webapp-nodejs.onrender.com/auth/google/blog",
+    //callbackURL: "http://localhost:3000/auth/google/blog",
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
